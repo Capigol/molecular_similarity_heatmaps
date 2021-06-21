@@ -15,3 +15,6 @@ dependencies:
         - xgboost==1.0.2
         - streamlit==0.69.2
         - seaborn
+        - streamlit==0.82.0
+        - streamlit_tags
+        - matplotlib.pyplot
