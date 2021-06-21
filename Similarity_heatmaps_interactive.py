@@ -59,7 +59,15 @@ split_size = st.sidebar.slider('Morgan fingerprint Radio', 2, 4, 2, 1)
 st.sidebar.subheader('ECFP LENGH')
 parameter_n_estimators = st.sidebar.slider('Set the fingerprint lenght', 512, 2048, 1024, 512)
 
-type_plot = st.checkbox('Interactive Plot')
+type_plot = st.sidebar.checkbox('Interactive Plot')
+
+plotly_color = st.sidebar.selectbox("Select the heatmap color", 
+                         ('Blackbody','Bluered','Blues','Earth','Electric','Greens',
+                          'Greys','Hot','Jet','Picnic','Portland','Rainbow','RdBu','Reds','Viridis','YlGnBu','YlOrRd'),
+                         15)
+
+
+
 
 #---------------------------------#
 # Main panel
@@ -113,11 +121,11 @@ def similarity(df_1,df_2):
 def heatmap(df_ok):
     #-----Plot-----#
     if type_plot == True:
-        color = "YlGnBu"
-        fig = go.Figure(go.Heatmap(z=df_ok,x0=1,dx=1, y0=1,dy=1, hoverongaps = False,showscale=True, colorscale=color,zmax=1,zmin=0))
+        # color = "YlGnBu"
+        fig = go.Figure(go.Heatmap(z=df_ok,x0=1,dx=1, y0=1,dy=1, hoverongaps = False,showscale=True, colorscale=plotly_color,zmax=1,zmin=0))
         st.plotly_chart(fig)
     else:
-        ax = sns.heatmap(df_ok, xticklabels=False, yticklabels=False)
+        ax = sns.heatmap(df_ok, xticklabels=False, yticklabels=False,linewidths=.3)
         plt.xlabel("Dataset 2")
         plt.ylabel("Dataset 1")
         st.set_option('deprecation.showPyplotGlobalUse', False)
