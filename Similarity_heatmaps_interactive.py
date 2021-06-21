@@ -126,7 +126,7 @@ def heatmap(df_ok):
         # color = "YlGnBu"
         fig = go.Figure(go.Heatmap(z=df_ok,x0=1,dx=1, y0=1,dy=1, hoverongaps = False,showscale=True, colorscale=plotly_color,zmax=1,zmin=0))
         fig.update_layout(margin = dict(t=200,r=200,b=200,l=200),
-        width = 700, height = 700,
+        width = 1024, height = 1024,
         autosize = False )
         st.plotly_chart(fig)
     else:
