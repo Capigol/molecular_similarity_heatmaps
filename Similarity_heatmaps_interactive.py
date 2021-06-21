@@ -12,15 +12,16 @@ from rdkit import Chem
 from rdkit.Chem import AllChem
 from rdkit.Chem import DataStructs # para calcular Tanimoto similarity
 import plotly.graph_objects as go
-import plotly
 from pathlib import Path
+import seaborn as sns; sns.set_theme()
+import matplotlib.pyplot as plt
+
 
 #---------------------------------#
 # Page layout
 ## Page expands to full width
 st.set_page_config(page_title='LIDEB Molecular similarity heatmap',
     layout='wide')
-
 
 ######
 # Funcion para poner una imagen    
@@ -55,11 +56,10 @@ uploaded_file_2 = st.sidebar.file_uploader("Upload your Dataset 2 in a TXT file"
 st.sidebar.header('ECFP Radio')
 split_size = st.sidebar.slider('Morgan fingerprint Radio', 2, 4, 2, 1)
 
-# st.sidebar.write('---')
-
 st.sidebar.subheader('ECFP LENGH')
 parameter_n_estimators = st.sidebar.slider('Set the fingerprint lenght', 512, 2048, 1024, 512)
 
+type_plot = st.checkbox('Interactive Plot')
 
 #---------------------------------#
 # Main panel
@@ -112,41 +112,26 @@ def similarity(df_1,df_2):
 
 def heatmap(df_ok):
     #-----Plot-----#
-    color = "YlGnBu"
-    # plotly.offline.plot(fig, filename= directorio + "\\" + str(dataset1) +"_vs_" + str(dataset2) +"_with_features" + ".html")
-    #-----Plot-----#
-    # layout = go.Layout(
-    #         xaxis=go.layout.XAxis(
-    #           title=go.layout.xaxis.Title(
-    #           text='n_estimators')
-    #          ),
-    #          yaxis=go.layout.YAxis(
-    #           title=go.layout.yaxis.Title(
-    #           text='max_features')
-    #         ) )
-    fig = go.Figure(go.Heatmap(z=df_ok,x0=1,dx=1, y0=1,dy=1, hoverongaps = False,showscale=True, colorscale=color,zmax=1,zmin=0))
-
-    # fig = go.Figure(data= [go.Surface(z=z, y=y, x=x)], layout=layout )
-    # fig.update_layout(title='Hyperparameter tuning',
-    #                   scene = dict(
-    #                     xaxis_title='n_estimators',
-    #                     yaxis_title='max_features',
-    #                     zaxis_title='R2'),
-    #                   autosize=False,
-    #                   width=800, height=800,
-    #                   margin=dict(l=65, r=50, b=65, t=90))
-    st.plotly_chart(fig)
-    # return ax
+    if type_plot == True:
+        color = "YlGnBu"
+        fig = go.Figure(go.Heatmap(z=df_ok,x0=1,dx=1, y0=1,dy=1, hoverongaps = False,showscale=True, colorscale=color,zmax=1,zmin=0))
+        st.plotly_chart(fig)
+    else:
+        ax = sns.heatmap(df_ok, xticklabels=False, yticklabels=False)
+        plt.xlabel("Dataset 2")
+        plt.ylabel("Dataset 1")
+        st.set_option('deprecation.showPyplotGlobalUse', False)
+        st.pyplot()
+        return ax
 
 # PARA GENERAR LA MATRIX Y EL HEATMAP
-
 
 # ---------------------------------#
 
 if uploaded_file_1 is not None and uploaded_file_2 is not None:
     df_1 = pd.read_csv(uploaded_file_1,sep="\t",header=None)
     df_2 = pd.read_csv(uploaded_file_2,sep="\t",header=None)
-    df_ok = similarity(df_1,df_2)    
+    df_ok = similarity(df_1,df_2)
     plot = heatmap(df_ok)
     st.markdown("You can download the heatmap by Right Click in the image and then **'save image as'** :blush: ")
     
