@@ -16,4 +16,4 @@ dependencies:
         - seaborn
         - streamlit==0.82.0
         - streamlit_tags
-        - matplotlib.pyplot ==3.3.2
+        - matplotlib==3.3.2
