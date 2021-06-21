@@ -17,3 +17,4 @@ dependencies:
         - streamlit==0.82.0
         - streamlit_tags
         - matplotlib==3.3.2
+        - plotly==5.0.0
