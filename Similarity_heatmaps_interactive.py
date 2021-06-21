@@ -59,13 +59,15 @@ split_size = st.sidebar.slider('Morgan fingerprint Radio', 2, 4, 2, 1)
 st.sidebar.subheader('ECFP LENGH')
 parameter_n_estimators = st.sidebar.slider('Set the fingerprint lenght', 512, 2048, 1024, 512)
 
+st.sidebar.header('Type of Plot')
 type_plot = st.sidebar.checkbox('Interactive Plot')
-
-plotly_color = st.sidebar.selectbox("Select the heatmap color", 
+if type_plot == True:
+    plotly_color = st.sidebar.selectbox("Select the heatmap color", 
                          ('Blackbody','Bluered','Blues','Earth','Electric','Greens',
                           'Greys','Hot','Jet','Picnic','Portland','Rainbow','RdBu','Reds','Viridis','YlGnBu','YlOrRd'),
                          15)
-
+else:
+    sns_color = st.sidebar.selectbox("Select the heatmap color", ("rocket", "mako", "flare","crest","magma","viridis"),5)
 
 
 
