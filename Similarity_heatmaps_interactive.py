@@ -125,6 +125,8 @@ def heatmap(df_ok):
     if type_plot == True:
         # color = "YlGnBu"
         fig = go.Figure(go.Heatmap(z=df_ok,x0=1,dx=1, y0=1,dy=1, hoverongaps = False,showscale=True, colorscale=plotly_color,zmax=1,zmin=0))
+        fig.update_xaxes(title_text='Dataset 2')
+        fig.update_yaxes(title_text='Dataset 1')
         fig.update_layout(margin = dict(t=60,r=20,b=20,l=20),
         width = 800, height = 800,
         autosize = False )
