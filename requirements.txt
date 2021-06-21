@@ -1,5 +1,5 @@
 streamlit==0.82.0
 streamlit_tags
-rdkit==2017.09.1
+rdkit==2020.09.1.0
 seaborn
 matplotlib.pyplot
