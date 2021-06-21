@@ -127,7 +127,7 @@ def heatmap(df_ok):
         fig = go.Figure(go.Heatmap(z=df_ok,x0=1,dx=1, y0=1,dy=1, hoverongaps = False,showscale=True, colorscale=plotly_color,zmax=1,zmin=0))
         st.plotly_chart(fig)
     else:
-        ax = sns.heatmap(df_ok, xticklabels=False, yticklabels=False,linewidths=.3,cmap=sns_color)
+        ax = sns.heatmap(df_ok, xticklabels=False, yticklabels=False,cmap=sns_color)
         plt.xlabel("Dataset 2")
         plt.ylabel("Dataset 1")
         st.set_option('deprecation.showPyplotGlobalUse', False)
