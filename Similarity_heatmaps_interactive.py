@@ -30,9 +30,9 @@ def img_to_bytes(img_path):
     encoded = base64.b64encode(img_bytes).decode()
     return encoded
 
-header_html = "<img src='data:image/png;base64,{}' class='img-fluid'>".format(img_to_bytes("cropped-header.png"))
-st.markdown(header_html, unsafe_allow_html=True,)
-######
+from PIL import Image
+image = Image.open('cropped-header-heatmaps.png')
+st.image(image)
 
 
 #---------------------------------#
@@ -161,4 +161,35 @@ else:
         plot = heatmap(df_ok)
         st.markdown('A dataset of **40 smiles** has been used as the example.')
         st.markdown("You can download the heatmap by Right Click in the image and then **'save image as'** :blush: ")
+
+        
+#Footer edit
+
+footer="""<style>
+a:link , a:visited{
+color: blue;
+background-color: transparent;
+text-decoration: underline;
+}
+a:hover,  a:active {
+color: red;
+background-color: transparent;
+text-decoration: underline;
+}
+.footer {
+position: fixed;
+left: 0;
+bottom: 0;
+width: 100%;
+background-color: white;
+color: black;
+text-align: center;
+}
+</style>
+<div class="footer">
+<p>Made in  🐍 and <img style='display: ; ' href="https://streamlit.io" src="https://i.imgur.com/iIOA6kU.png" target="_blank"></img> Developed with ❤️ by <a style='display: ; text-align: center' href="https://twitter.com/capigol" target="_blank">Lucas Alberca</a> for <a style='display:; text-align: center;' href="https://lideb.biol.unlp.edu.ar/" target="_blank">LIDeB</a></p>
+</div>
+"""
+st.markdown(footer,unsafe_allow_html=True)
+
 
