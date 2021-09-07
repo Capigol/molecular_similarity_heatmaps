@@ -78,7 +78,7 @@ st.sidebar.title(":speech_balloon: Contact Us")
 st.sidebar.info(
 """
 If you are looking to contact us, please
-[:e-mail:](mailto:lideb@biol.unlp.edu.ar) or [T](https://twitter.com/LIDeB_UNLP)
+[:e-mail:](mailto:lideb@biol.unlp.edu.ar) or [Twitter](https://twitter.com/LIDeB_UNLP)
 """)
 
 #---------------------------------#
