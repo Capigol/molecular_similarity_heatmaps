@@ -162,7 +162,11 @@ if uploaded_file_1 is not None and uploaded_file_2 is not None:
     df_2 = pd.read_csv(uploaded_file_2,sep="\t",header=None)
     df_ok = similarity(df_1,df_2)
     plot = heatmap(df_ok)
-    st.markdown("You can download the heatmap by Right Click in the image and then **'save image as'** :blush: ")
+    if type_plot == False:
+        st.markdown("You can download the heatmap by Right Click in the image and then **'save image as'** :blush: ")
+    else:
+        st.markdown("You can download the heatmap by clicking on the camera icon at the top of the plot :blush: ")
+
     
 # Example file
 else:
@@ -173,7 +177,11 @@ else:
         df_ok = similarity(df_1,df_2)    
         plot = heatmap(df_ok)
         st.markdown('A dataset of **40 smiles** has been used as the example.')
-        st.markdown("You can download the heatmap by Right Click in the image and then **'save image as'** :blush: ")
+        if type_plot == False:
+            st.markdown("You can download the heatmap by Right Click in the image and then **'save image as'** :blush: ")
+        else:
+            st.markdown("You can download the heatmap by clicking on the camera icon at the top of the plot :blush: ")
+
 
         
 #Footer edit
