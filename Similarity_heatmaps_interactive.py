@@ -44,9 +44,7 @@ st.markdown(":computer:""**Web Site** " "<https://lideb.biol.unlp.edu.ar>")
 st.write("""
 # LIDeB Tools - Similarity Heatmaps
 
-**WebApp to generate heatmaps based in the molecular similarity**
-
-*Morgan Fingerprints and Tanimoto Coefficient* are used for the generation of **Similarity Heatmaps**.
+This WebApp build a Heatmap of molecular similarity. These plots of inter-molecular similarity (computed as Tanimoto similarity coefficient using Morgan fingerprints and other molecular fingerprinting systems) allow for a fast, visual inspection of the molecular diversity of the datasets, and also preliminary detection of clusters within a dataset. The resulting plots are downloadable as .png files through a simple right click on your mouse!.
 """)
 
 
@@ -58,11 +56,14 @@ uploaded_file_1 = st.sidebar.file_uploader("Upload your Dataset 1 in a TXT file"
 uploaded_file_2 = st.sidebar.file_uploader("Upload your Dataset 2 in a TXT file", type=["txt"])
 
 # Sidebar - Specify parameter settings
-st.sidebar.header('ECFP Radio')
+st.sidebar.header('Morgan FP Radio')
 split_size = st.sidebar.slider('Morgan fingerprint Radio', 2, 4, 2, 1)
 
-st.sidebar.subheader('ECFP LENGH')
+st.sidebar.subheader('Morgan FP Lengh')
 parameter_n_estimators = st.sidebar.slider('Set the fingerprint lenght', 512, 2048, 1024, 512)
+
+similarity_metric = st.sidebar.selectbox("Select the similarity metric", ("TanimotoSimilarity", "DiceSimilarity", "CosineSimilarity", "SokalSimilarity", "RusselSimilarity", "KulczynskiSimilarity", "McConnaugheySimilarity"),0)
+
 
 st.sidebar.header('Type of Plot')
 type_plot = st.sidebar.checkbox('Interactive Plot')
@@ -103,13 +104,13 @@ def similarity(df_1,df_2):
     fps_1 = []    
     for m in df_1:
         mol = Chem.MolFromSmiles(m)
-        fp_1 = AllChem.GetMorganFingerprintAsBitVect(mol,split_size,nBits=parameter_n_estimators,useFeatures=True)
+        fp_1 = AllChem.GetMorganFingerprintAsBitVect(mol,split_size,nBits=parameter_n_estimators,useFeatures=False)
         fps_1.append(fp_1)
     
     fps_2 = []
     for m1 in df_2:
         mole = Chem.MolFromSmiles(m1)
-        fp_2 = AllChem.GetMorganFingerprintAsBitVect(mole,split_size,nBits=parameter_n_estimators,useFeatures=True)
+        fp_2 = AllChem.GetMorganFingerprintAsBitVect(mole,split_size,nBits=parameter_n_estimators,useFeatures=False)
         fps_2.append(fp_2)
     
     # COMPARAMOS LAS FINGERPRINTS POR TANIMOTO Y GENERAMOS LA MATRIZ
@@ -118,7 +119,8 @@ def similarity(df_1,df_2):
     for finger1 in fps_1:
         lista = []
         for finger2 in fps_2:
-            tan_sim_ac_in=DataStructs.TanimotoSimilarity(finger1, finger2)
+            similarity_metric_ok = getattr(DataStructs, similarity_metric)
+            tan_sim_ac_in= similarity_metric_ok(finger1, finger2)
             lista.append(tan_sim_ac_in)
         matriz_tanimoto.append(lista)
     
@@ -146,6 +148,7 @@ def heatmap(df_ok):
         ax = sns.heatmap(df_ok, xticklabels=False, yticklabels=False,cmap=sns_color)
         plt.xlabel("Dataset 2")
         plt.ylabel("Dataset 1")
+        plt.savefig('image.png', dpi = 300)       
         st.set_option('deprecation.showPyplotGlobalUse', False)
         st.pyplot()
         return ax
