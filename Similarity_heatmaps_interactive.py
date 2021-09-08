@@ -44,16 +44,18 @@ st.markdown(":computer:""**Web Site** " "<https://lideb.biol.unlp.edu.ar>")
 st.write("""
 # LIDeB Tools - Similarity Heatmaps
 
-This WebApp build a Heatmap of molecular similarity. These plots of inter-molecular similarity (computed as Tanimoto similarity coefficient using Morgan fingerprints and other molecular fingerprinting systems) allow for a fast, visual inspection of the molecular diversity of the datasets, and also preliminary detection of clusters within a dataset. The resulting plots are downloadable as .png files through a simple right click on your mouse!.
+This WebApp builds a heatmap of molecular similarity. These plots of inter-molecular similarity (computed as Tanimoto similarity coefficient using Morgan fingerprints or other molecular fingerprinting systems) allow for a fast, visual inspection of the molecular diversity of the datasets, and also preliminary detection of clusters within a dataset. The resulting plots are downloadable as .png files through a simple right click on your mouse!.
 """)
 
 
 #---------------------------------#
 # Sidebar - Collects user input features into dataframe
-st.sidebar.header('Upload your datasets (Smiles)')
+st.sidebar.header('Upload your set of compounds (SMILES)')
 
-uploaded_file_1 = st.sidebar.file_uploader("Upload your Dataset 1 in a TXT file", type=["txt"])
-uploaded_file_2 = st.sidebar.file_uploader("Upload your Dataset 2 in a TXT file", type=["txt"])
+st.markdown("Upload your set of compounds using SMILES chemical notation, one compound per line in a .txt file)
+
+uploaded_file_1 = st.sidebar.file_uploader("Upload your first set of compounds, type=["txt"])
+uploaded_file_2 = st.sidebar.file_uploader("Upload your second set of compounds", type=["txt"])
 
 # Sidebar - Specify parameter settings
 st.sidebar.header('Morgan FP Radio')
@@ -176,7 +178,7 @@ else:
         df_2 = pd.read_csv("molecules_1.txt",sep="\t",header=None)
         df_ok = similarity(df_1,df_2)    
         plot = heatmap(df_ok)
-        st.markdown('A dataset of **40 smiles** has been used as the example.')
+        st.markdown('A dataset of **40 SMILES** has been used as the example.')
         if type_plot == False:
             st.markdown("You can download the heatmap by Right Click in the image and then **'save image as'** :blush: ")
         else:
