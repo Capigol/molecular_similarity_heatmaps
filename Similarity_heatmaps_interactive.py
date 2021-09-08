@@ -178,7 +178,7 @@ else:
         df_2 = pd.read_csv("molecules_1.txt",sep="\t",header=None)
         df_ok = similarity(df_1,df_2)    
         plot = heatmap(df_ok)
-        st.markdown('A dataset of **40 SMILES** has been used as the example.')
+        st.markdown('A dataset of **40 SMILES** has been used as example.')
         if type_plot == False:
             st.markdown("You can download the heatmap by Right Click in the image and then **'save image as'** :blush: ")
         else:
