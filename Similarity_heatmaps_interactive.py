@@ -52,7 +52,7 @@ This WebApp builds a heatmap of molecular similarity. These plots of inter-molec
 # Sidebar - Collects user input features into dataframe
 st.sidebar.header('Upload your set of compounds (SMILES)')
 
-st.markdown("Upload your set of compounds using SMILES chemical notation, one compound per line in a .txt file)
+st.markdown("Upload your set of compounds using SMILES chemical notation, one compound per line in a .txt file")
 
 uploaded_file_1 = st.sidebar.file_uploader("Upload your first set of compounds, type=["txt"])
 uploaded_file_2 = st.sidebar.file_uploader("Upload your second set of compounds", type=["txt"])
