@@ -20,7 +20,7 @@ import matplotlib.pyplot as plt
 #---------------------------------#
 # Page layout
 ## Page expands to full width
-st.set_page_config(page_title='LIDEB Molecular similarity heatmap',
+st.set_page_config(page_title='LIDEB Tools - Molecular Similarity Heatmap',
     layout='wide')
 
 ######
