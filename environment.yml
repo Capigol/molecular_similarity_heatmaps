@@ -18,3 +18,4 @@ dependencies:
         - streamlit_tags
         - matplotlib==3.3.2
         - plotly==5.0.0
+        - protobuf~=3.19.0
