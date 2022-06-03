@@ -1,6 +1,0 @@
-streamlit==0.82.0
-streamlit_tags
-rdkit==2020.09.1.0
-seaborn
-matplotlib.pyplot
-protobuf~=3.19.0
