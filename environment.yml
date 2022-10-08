@@ -14,7 +14,7 @@ dependencies:
         - mordred
         - xgboost==1.0.2
         - seaborn
-        - streamlit==0.82.0
+        - streamlit
         - streamlit_tags
         - matplotlib==3.3.2
         - plotly==5.0.0
