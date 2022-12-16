@@ -186,6 +186,18 @@ else:
         else:
             st.markdown("You can download the heatmap by clicking on the camera icon at the top of the plot :blush: ")
 
+            
+st.write("""
+### Cite us:
+*LIDeB Tools: A Latin American resource of freely available, open-source cheminformatics apps*
+
+Denis N. Prada Gori, Lucas N. Alberca, Santiago Rodriguez, Juan I.Alice, Manuel A.Llanos, Carolina L. Bellera, Alan Talevi.
+
+Artificial Intelligence in the Life Sciences
+
+[DOI: 10.1016/j.ailsci.2022.100049](https://www.sciencedirect.com/science/article/pii/S2667318522000198)
+    
+""")            
 
         
 #Footer edit
