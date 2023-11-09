@@ -149,7 +149,7 @@ def heatmap(df_ok):
         st.plotly_chart(fig)
     else:
         df_ok.sort_index(axis=0, ascending=False,inplace=True)
-        ax = sns.heatmap(df_ok, xticklabels=False, yticklabels=False,cmap=sns_color)
+        ax = sns.heatmap(df_ok, xticklabels=False, yticklabels=False,cmap=sns_color,vmin=0, vmax=1)
         plt.xlabel("Dataset 2")
         plt.ylabel("Dataset 1")
         plt.savefig('image.png', dpi = 300)       
